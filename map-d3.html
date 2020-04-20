@@ -1,0 +1,424 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>CS360/560 Homework4</title>
+
+        <!-- Required CSS files -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/owl.carousel.css">
+    <link rel="stylesheet" href="assets/css/barfiller.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="https://www.jq22.com/jquery/font-awesome.4.7.0.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/slicknav.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <style media="screen">
+      svg{
+        border: 1px solid #ccc;
+        }
+        .node circle {
+          fill: #999;
+        }
+
+        .node text {
+          font: 10px sans-serif;
+        }
+
+        .node--internal circle {
+          fill: #555;
+        }
+
+        .node--internal text {
+          text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff;
+        }
+
+        .link {
+          fill: none;
+          stroke: #555;
+          stroke-opacity: 0.4;
+          stroke-width: 1.5px;
+        }
+
+        form {
+          font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+          position: absolute;
+          left: 10px;
+          top: 10px;
+        }
+
+        label {
+          display: block;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="preloader">
+        <span class="preloader-spin"></span>
+    </div>
+    <div class="site">
+		<header id="header">
+			<div class="container">
+				<div class="row">
+					<div class="col-6 col-sm-3 logo-column">
+						<h3><a href="index.html" class="logo">Datalization</a></h3>
+					</div>
+					<div class="col-6 col-sm-9 nav-column clearfix">
+						<nav id="menu" class="d-none d-lg-block">
+							<ul>
+								<li><a href="index.html">Home</a></li>
+								<li class="current-menu-item"><a href="dataset.html">DataSet</a></li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</header>
+		<main id="main">
+			<div class="page-title sp" style="background-image: url(assets/img/home-banner.jpg)">
+				<div class="container text-center">
+					<h2>About D3 Implementation</h2>
+					<!-- <p>For this project, we will collect data from Fire Departmemt.</p> -->
+				</div>
+			</div>
+			<div class="about-area sp">
+				<div class="container content-main">
+					<h4>Hierarchy diagram Implementation</h4>
+          <p>Visualize the <a href="https://data.sfgov.org/City-Infrastructure/311-Cases/vw6y-z8j6">“ SF 311 dataset”. </a>
+          Filtering the dataset to show cases that were OPENED in the month of February 2020 only and its Category is <strong>Residential Building Request</strong>. </p>
+          <p>In basemap,I use <strong>current police districts</strong> as a map projection and shows the Boundaries of difference districts.</p>
+          <p>I choose <strong>choropleth map</strong> to visualize the dateset. I rollup the "residential building request" cases by districts
+          and visualize a numerical value using fill colr for that region.</p>
+          <p>D3’s cluster layout produces node-link diagrams with leaf nodes at equal depth. These are less compact than tidy trees, but are useful for dendrograms, hierarchical clustering and phylogenetic trees.</p>
+          <hr>
+          <h4>Visualization Writeup</h4>
+          <ul>
+            <li><strong>Encoding: </strong>The number of cases in different districts is encoded by the depth of filled color, so greener color represents higher number of cases.</li>
+            <li><strong>Interactivity: </strong>
+            <ul>
+                <li><strong>Hovering And Tooltips: </strong>show details when the mouse hovers over a region and/or symbol.</li>
+                <li><strong>Zooming And Panning:: </strong>Allow users to zoom in on a region (either mouse scroll or click) and pan (drag) the view while zoomed in.</li>
+            </ul>
+          </li>
+            <li><strong>Wrangling: </strong>Filtering the dataset to show cases that were OPENED in the month of February 2020 only and its Category is Residential Building Request</li>
+            <li><strong>Conclusion: </strong>The map shows the northern district and central district have more number of 311 cases which is residental building request. But I think
+            using or calculate a per sq ft or per ratio will be more accurately.</li>
+          </ul>
+
+          <br>
+          <figure>
+            <form>
+                  <label><input type="radio" name="mode" value="cluster" checked> Dendrogram</label>
+                  <label><input type="radio" name="mode" value="tree"> Tree</label>
+            </form>
+            <svg width="960" height="500" id="vis"></svg>
+         <figcaption>
+           Source: <a href="https://data.sfgov.org/City-Infrastructure/311-Cases/vw6y-z8j6">311 Department cases call type Category</a>
+         </figcaption>
+        </figure>
+
+        <br>
+        <p>A treemap recursively subdivides area into rectangles; the area of any node in the tree corresponds to its value</p>
+        <figure>
+            <svg width="960" height="500" id="vis2"></svg>
+            <figcaption>
+              Source: <a href="https://data.sfgov.org/City-Infrastructure/311-Cases/vw6y-z8j6">311 Department cases call type Category</a>
+            </figcaption>
+        </figure>
+
+        <script src="https://d3js.org/d3.v5.min.js"></script>
+        <script src="https://d3js.org/d3-hierarchy.v1.min.js"></script>
+        <script src="https://d3js.org/d3-dsv.v1.min.js"></script>
+        <script>
+
+        var newdata = `Group,Type,Count,Unit Type
+,Call Categories
+Call Categories,Alarm
+Call Categories,Fire
+Call Categories,Non Life-threatening
+Call Categories,Potentially Life-Threatening
+Alarm,Aircraft Emergency,63,63
+Alarm,Alarms,270420,270420
+Alarm,Assist Police,451,451
+Alarm,Citizen Assist / Service Call,32451,32451
+Alarm,Electrical Hazard,8411,8411
+Alarm,Elevator / Escalator Rescue,7131,7131
+Alarm,Fuel Spill,2302,2302
+Alarm,Gas Leak (Natural and LP Gases),12200,12200
+Alarm,HazMat,934,934
+Alarm,Medical Incident,1452,1452
+Alarm,Odor (Strange / Unknown),3209,3209
+Alarm,Oil Spill,4,4
+Alarm,Outside Fire,3548,3548
+Alarm,Smoke Investigation (Outside),5210,5210
+Alarm,Structure Fire,204954,204954
+Alarm,Vehicle Fire,13,13
+Alarm,Watercraft in Distress,14,14
+Fire,Administrative,1,1
+Fire,Aircraft Emergency,185,185
+Fire,Confined Space / Structure Collapse,331,331
+Fire,Explosion,1114,1114
+Fire,"Extrication / Entrapped (Machinery, Vehicle)",402,402
+Fire,HazMat,246,246
+Fire,High Angle Rescue,693,693
+Fire,Industrial Accidents,440,440
+Fire,Marine Fire,174,174
+Fire,Mutual Aid / Assist Outside Agency,178,178
+Fire,Odor (Strange / Unknown),52,52
+Fire,Outside Fire,26727,26727
+Fire,Structure Fire,40925,40925
+Fire,Suspicious Package,65,65
+Fire,Train / Rail Fire,10,10
+Fire,Train / Rail Incident,578,578
+Fire,Vehicle Fire,8594,8594
+Fire,Watercraft in Distress,559,559
+Fire,Water Rescue,15874,15874
+Non Life-threatening,Medical Incident,537563,537563
+Non Life-threatening,Traffic Collision,39555,39555
+Potentially Life-Threatening,Medical Incident,1118158,1118158
+Potentially Life-Threatening,Structure Fire,16,16
+Potentially Life-Threatening,Traffic Collision,69097,69097
+Potentially Life-Threatening,Water Rescue,55,55
+`;
+
+        var svg = d3.select("#vis"),
+            width = +svg.attr("width"),
+            height = +svg.attr("height"),
+            g = svg.append("g").attr("transform", "translate(60,0)");
+
+        var tree = d3.tree()
+            .size([height - 50, width - 250]);
+
+        var cluster = d3.cluster()
+            .size([height, width]);
+
+        var stratify = d3.stratify()
+            .id(function(d){return d.Type})
+            .parentId(function(d) { return d.Group; });
+
+         var data= d3.csvParse(newdata);
+
+
+
+          var jsondata = stratify(data)
+              .sort(function(a, b) { return (a.height - b.height) || a.id.localeCompare(b.id); });
+
+          cluster(jsondata);
+
+          var link = g.selectAll(".link")
+              .data(jsondata.descendants().slice(1))
+            .enter().append("path")
+              .attr("class", "link")
+              .attr("d", diagonal);
+
+          var node = g.selectAll(".node")
+              .data(jsondata.descendants())
+            .enter().append("g")
+              .attr("class", function(d) { return "node" + (d.children ? " node--internal" : " node--leaf"); })
+              .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
+
+          node.append("circle")
+              .attr("r", 3);
+
+          node.append("text")
+              .attr("dy", 3)
+              .attr("x", function(d) { return d.children ? -8 : 8; })
+              .style("text-anchor", function(d) { return d.children ? "end" : "start"; })
+              .text(function(d) { return d.id; });
+
+          d3.selectAll("input")
+              .on("change", changed);
+
+          var timeout = setTimeout(function() {
+            d3.select("input[value=\"tree\"]")
+                .property("checked", true)
+                .dispatch("change");
+          }, 1000);
+
+          function changed() {
+            timeout = clearTimeout(timeout);
+            (this.value === "tree" ? tree : cluster)(jsondata);
+            var t = d3.transition().duration(750);
+            node.transition(t).attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
+            link.transition(t).attr("d", diagonal);
+          }
+
+
+        function diagonal(d) {
+          return "M" + d.y + "," + d.x
+              + "C" + (d.parent.y + 10) + "," + d.x
+              + " " + (d.parent.y + 10) + "," + d.parent.x
+              + " " + d.parent.y + "," + d.parent.x;
+        }
+
+        // build space-filling diagram
+        var new_width = 954;
+        var new_height = 500;
+
+        const x = d3.scaleLinear().rangeRound([0, width]);
+        const y = d3.scaleLinear().rangeRound([0, height]);
+        // console.log(root);
+        // console.log(root.children);
+
+        var newDate = d3.json("data.json",function(newData){
+           console.log(newData);
+        });
+
+        console.log(newDate);
+        console.log();
+
+
+        treemap = newDate => d3.treemap()
+                            .tile(tile)
+                          (d3.hierarchy(newDate)
+                            .sum(d => d.value)
+                            .sort((a, b) => b.value - a.value))
+
+        const group = d3.select("#vis2")
+                        .append("g")
+                        .call(render,treemap(newDate));
+
+        function render(group, root) {
+
+        const node = group
+             .selectAll("g")
+             .data(root.data)
+             .join("g");
+
+       console.log(node);
+       node.filter(d => d === root ? d.parent : d.children)
+           .attr("cursor", "pointer")
+           .on("click", d => d === root ? zoomout(root) : zoomin(d));
+
+       node.append("title")
+           .text(d => `${name(d)}\n${format(d.Count)}`);
+
+       node.append("rect")
+           .attr("id", d => (d.leafUid = DOM.uid("leaf")).id)
+           .attr("fill", d => d === root1 ? "#fff" : d.children ? "#ccc" : "#ddd")
+           .attr("stroke", "#fff");
+
+       node.append("clipPath")
+           .attr("id", d => (d.clipUid = DOM.uid("clip")).id)
+         .append("use")
+           .attr("xlink:href", d => d.leafUid.href);
+
+       node.append("text")
+           .attr("clip-path", d => d.clipUid)
+           .attr("font-weight", d => d === root ? "bold" : null)
+         .selectAll("tspan")
+         .data(d => (d === root ? name(d) : d.data.name).split(/(?=[A-Z][^A-Z])/g).concat(format(d.value)))
+         .join("tspan")
+           .attr("x", 3)
+           .attr("y", (d, i, nodes) => `${(i === nodes.length - 1) * 0.3 + 1.1 + i * 0.9}em`)
+           .attr("fill-opacity", (d, i, nodes) => i === nodes.length - 1 ? 0.7 : null)
+           .attr("font-weight", (d, i, nodes) => i === nodes.length - 1 ? "normal" : null)
+           .text(d => d);
+
+       group.call(position, root);
+     }
+
+     function position(group, root) {
+       group.selectAll("g")
+           .attr("transform", d => d === root ? `translate(0,-30)` : `translate(${x(d.x0)},${y(d.y0)})`)
+         .select("rect")
+           .attr("width", d => d === root ? width : x(d.x1) - x(d.x0))
+           .attr("height", d => d === root ? 30 : y(d.y1) - y(d.y0));
+     }
+
+     // When zooming in, draw the new nodes on top, and fade them in.
+     function zoomin(d) {
+       const group0 = group.attr("pointer-events", "none");
+       const group1 = group = svg.append("g").call(render, d);
+
+       x.domain([d.x0, d.x1]);
+       y.domain([d.y0, d.y1]);
+
+       svg.transition()
+           .duration(750)
+           .call(t => group0.transition(t).remove()
+             .call(position, d.parent))
+           .call(t => group1.transition(t)
+             .attrTween("opacity", () => d3.interpolate(0, 1))
+             .call(position, d));
+     }
+
+     // When zooming out, draw the old nodes on top, and fade them out.
+     function zoomout(d) {
+       const group0 = group.attr("pointer-events", "none");
+       const group1 = group = svg.insert("g", "*").call(render, d.parent);
+
+       x.domain([d.parent.x0, d.parent.x1]);
+       y.domain([d.parent.y0, d.parent.y1]);
+
+       svg.transition()
+           .duration(750)
+           .call(t => group0.transition(t).remove()
+             .attrTween("opacity", () => d3.interpolate(1, 0))
+             .call(position, d))
+           .call(t => group1.transition(t)
+             .call(position, d.parent));
+     }
+
+
+
+
+       format = d3.format(",d")
+
+       function tile(node, x0, y0, x1, y1) {
+           d3.treemapBinary(node, 0, 0, width, height);
+           for (const child of node.children) {
+             child.x0 = x0 + child.x0 / width * (x1 - x0);
+             child.x1 = x0 + child.x1 / width * (x1 - x0);
+             child.y0 = y0 + child.y0 / height * (y1 - y0);
+             child.y1 = y0 + child.y1 / height * (y1 - y0);
+           }
+       }
+
+      </script>
+				</div>
+			</div>
+		</main>
+		<footer>
+			<div class="footer-bottom">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="copyright-txt">
+								Copyright &copy; 2020.Datalization All rights reserved.
+							</div>
+						</div>
+						<div class="col-lg-6 text-right">
+							<div class="footer-nav">
+								<a href="index.html">Home</a>
+								<a href="dataset.html">Dataset</a>
+								<a href="data.html">Data</a>
+								<a href="team.html">Team</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+    </div>
+
+    <!--Required JS files-->
+<script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+<script src="assets/js/vendor/popper.min.js"></script>
+<script src="assets/js/vendor/bootstrap.min.js"></script>
+<script src="assets/js/vendor/owl.carousel.min.js"></script>
+<script src="assets/js/vendor/isotope.pkgd.min.js"></script>
+<script src="assets/js/vendor/jquery.barfiller.js"></script>
+<script src="assets/js/vendor/loopcounter.js"></script>
+<script src="assets/js/vendor/slicknav.min.js"></script>
+<script src="assets/js/active.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,170 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>CS360/560 Homework4</title>
+
+        <!-- Required CSS files -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/owl.carousel.css">
+    <link rel="stylesheet" href="assets/css/barfiller.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="https://www.jq22.com/jquery/font-awesome.4.7.0.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/slicknav.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+</head>
+
+<body>
+    <div class="preloader">
+        <span class="preloader-spin"></span>
+    </div>
+    <div class="site">
+		<header id="header">
+			<div class="container">
+				<div class="row">
+					<div class="col-6 col-sm-3 logo-column">
+						<h3><a href="index.html" class="logo">Datalization</a></h3>
+					</div>
+					<div class="col-6 col-sm-9 nav-column clearfix">
+						<nav id="menu" class="d-none d-lg-block">
+							<ul>
+								<li><a href="index.html">Home</a></li>
+								<li class="current-menu-item"><a href="map-d3.html">D3 implementation</a></li>
+								<!-- <li class="has-child">
+									<a href="data.html">Data</a>
+									<ul class="sub-menu">
+										<li><a href="#"><i class="fa fa-bar-chart"></i> Bar Chart</a></li>
+										<li><a href="#"><i class="fa fa-pie-chart"></i> Pie Chart</a></li>
+										<li><a href="#"><i class="fa fa-area-chart"></i> Area Chart</a></li>
+										<li><a href="#"><i class="fa fa-line-chart"></i> Line Chart</a></li>
+									</ul>
+								</li> -->
+								<!-- <li><a href="team.html">Team</a></li> -->
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</header>
+		<main id="main">
+			<div class="page-title sp" style="background-image: url(assets/img/home-banner.jpg)">
+				<div class="container text-center">
+					<h2>About Dataset</h2>
+					<!-- <p>For this project, we will collect data from Fire Departmemt.</p> -->
+				</div>
+			</div>
+			<div class="about-area sp">
+				<div class="container content-main">
+					<h4>DataSet</h4>
+          <p>Visualize the <a href="https://data.sfgov.org/City-Infrastructure/311-Cases/vw6y-z8j6">“ SF 311 dataset” </a></p>
+					<ul>
+						<li>
+							<strong>About</strong>
+              <p>This dataset includes cases generally associated with a place or thing (for example parks, streets, or buildings) and created July 1, 2008 or later. Cases generally logged by a user regarding their own needs (for example, property or business tax questions,
+                 parking permit requests) are not included. See the Program Link and detailed attachment below for more information..</p>
+						</li>
+						<li>
+							<strong>Data Source Link</strong>
+							<p><a href="https://sf311.org">https://sf311.org </a></p>
+						</li>
+            <li>
+              <strong>Data Filtering</strong>
+              <p>ilter the dataset to show cases that were OPENED in the month of February 2020 only. I choose a"Residential Building Request" (approximately 100 cases) that has at least 100 cases associated with it.
+                </p>
+            </li>
+						<li>
+						  	<p><strong>Data license</strong></p>
+							<blockquote>
+								<p>"This data is made available under the Public Domain Dedication and License(PDDL)whose full text can be found at: <a href="https://opendatacommons.org/licenses/pddl/1.0/">https://opendatacommons.org/licenses/pddl/1.0/</a>"</p>
+								<cite>Click <a href="https://opendatacommons.org/licenses/pddl/1.0/">here</a> to read dataset license informaiton.</cite>
+							</blockquote>
+						</li>
+						<li>
+						  	<p><strong>Column Description</strong></p>
+						  	<ol>
+								<li><strong>Call Type Group:</strong> Call types are divided into four main groups: Fire, Alarm, Potential Life Threatening and Non Life Threatening.</li>
+								<li><strong>Call Type:</strong> Call types of 311 case.</li>
+                <li><strong>Station Area:</strong> Fire Station First Response Area associated with the address of the incident.</li>
+                <li><strong>Battalion:</strong>Emergency Response District (There are 9 Fire Emergency Response Districts.</li>
+								<li><strong>Closed:</strong> The date and time when the service request was closed</li>
+								<li><strong>Status:</strong> A single-word indicator of the current state of the service request. (Note: GeoReport V2 only permits ‘open’ and ‘closed’)</li>
+                <li><strong>Supervisor District:</strong> San Francisco Supervisor District as defined in 'Supervisor Districts as of April 2012'.</li>
+
+                <li><strong>Latitude:</strong> Latitude of the location, using the WGS84 projection.</li>
+
+                <li><strong>Longitude:</strong> Longitude of the location, using the WGS84 projection.</li>
+
+                <li><strong>Media URL:</strong>A URL to media associated with the request, e.g. an image.</li>
+
+                </ol>
+						</li>
+				  	</ul>
+				</div>
+			</div>
+		</main>
+		<footer>
+			<!-- <div class="footer-top">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12 col-lg-6 footer_widget">
+							<div class="inner">
+								<h4>About</h4>
+								<p>Each group must determine a cohesive theme for the project. This could be an overall story that each visualization will help tell, or a broad question that each visualization will help answer in different ways.</p>
+							</div>
+						</div>
+						<div class="col-md-12 col-lg-6 footer_widget">
+							<div class="inner">
+								<h4>Credits</h4>
+								<ul>
+									<li><a href="https://www.themeum.com" target="_blank">Theme: Flat Theme</a></li>
+									<li><a href="https://getbootstrap.com/" target="_blank">Framework: Bootstrap</a></li>
+									<li><a href="https://www.freepik.com" target="_blank">Images: freepik</a></li>
+									<li><a href="https://unsplash.com/" target="_blank">Images: Unsplash</a></li>
+									<li><a href="https://fontawesome.com" target="_blank">Icon: FontAwesome</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div> -->
+			<div class="footer-bottom">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="copyright-txt">
+								Copyright &copy; 2020.Datalization All rights reserved.
+							</div>
+						</div>
+						<div class="col-lg-6 text-right">
+							<div class="footer-nav">
+								<a href="index.html">Home</a>
+								<a href="dataset.html">Dataset</a>
+								<a href="data.html">Data</a>
+								<a href="team.html">Team</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+    </div>
+
+    <!--Required JS files-->
+<script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+<script src="assets/js/vendor/popper.min.js"></script>
+<script src="assets/js/vendor/bootstrap.min.js"></script>
+<script src="assets/js/vendor/owl.carousel.min.js"></script>
+<script src="assets/js/vendor/isotope.pkgd.min.js"></script>
+<script src="assets/js/vendor/jquery.barfiller.js"></script>
+<script src="assets/js/vendor/loopcounter.js"></script>
+<script src="assets/js/vendor/slicknav.min.js"></script>
+<script src="assets/js/active.js"></script>
+
+</body>
+
+</html>

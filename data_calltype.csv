@@ -1,0 +1,52 @@
+Group,Type,Unit ID,Unit Type
+,Call Categories
+Call Categories,Alarm
+Call Categories,Fire
+Call Categories,Non Life-threatening
+Call Categories,Potentially Life-Threatening
+Alarm,Aircraft Emergency,63,63
+Alarm,Alarms,270420,270420
+Alarm,Assist Police,451,451
+Alarm,Citizen Assist / Service Call,32451,32451
+Alarm,Electrical Hazard,8411,8411
+Alarm,Elevator / Escalator Rescue,7131,7131
+Alarm,Fuel Spill,2302,2302
+Alarm,Gas Leak (Natural and LP Gases),12200,12200
+Alarm,HazMat,934,934
+Alarm,Medical Incident,1452,1452
+Alarm,Odor (Strange / Unknown),3209,3209
+Alarm,Oil Spill,4,4
+Alarm,Other,29093,29093
+Alarm,Outside Fire,3548,3548
+Alarm,Smoke Investigation (Outside),5210,5210
+Alarm,Structure Fire,204954,204954
+Alarm,Vehicle Fire,13,13
+Alarm,Watercraft in Distress,14,14
+Fire,Administrative,1,1
+Fire,Aircraft Emergency,185,185
+Fire,Confined Space / Structure Collapse,331,331
+Fire,Explosion,1114,1114
+Fire,"Extrication / Entrapped (Machinery, Vehicle)",402,402
+Fire,HazMat,246,246
+Fire,High Angle Rescue,693,693
+Fire,Industrial Accidents,440,440
+Fire,Marine Fire,174,174
+Fire,Mutual Aid / Assist Outside Agency,178,178
+Fire,Odor (Strange / Unknown),52,52
+Fire,Other,701,701
+Fire,Outside Fire,26727,26727
+Fire,Structure Fire,40925,40925
+Fire,Suspicious Package,65,65
+Fire,Train / Rail Fire,10,10
+Fire,Train / Rail Incident,578,578
+Fire,Vehicle Fire,8594,8594
+Fire,Watercraft in Distress,559,559
+Fire,Water Rescue,15874,15874
+Non Life-threatening,Medical Incident,537563,537563
+Non Life-threatening,Other,3619,3619
+Non Life-threatening,Traffic Collision,39555,39555
+Potentially Life-Threatening,Medical Incident,1118158,1118158
+Potentially Life-Threatening,Other,1531,1531
+Potentially Life-Threatening,Structure Fire,16,16
+Potentially Life-Threatening,Traffic Collision,69097,69097
+Potentially Life-Threatening,Water Rescue,55,55
