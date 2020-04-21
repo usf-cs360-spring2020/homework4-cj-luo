@@ -1,0 +1,289 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>CS360/560 Homework4</title>
+
+        <!-- Required CSS files -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/owl.carousel.css">
+    <link rel="stylesheet" href="assets/css/barfiller.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="https://www.jq22.com/jquery/font-awesome.4.7.0.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/slicknav.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <style media="screen">
+      svg{
+        border: 1px solid #ccc;
+        }
+            .node {
+        cursor: pointer;
+      }
+
+      .node:hover {
+        stroke: #000;
+        stroke-width: 1.5px;
+      }
+
+      .node--leaf {
+        fill: white;
+      }
+
+      .label {
+        font: 11px "Helvetica Neue", Helvetica, Arial, sans-serif;
+        text-anchor: middle;
+        text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
+      }
+
+      .label,
+      .node--root,
+      .node--leaf {
+        pointer-events: none;
+      }
+
+      div.tooltip {
+   position: absolute;
+   text-align: center;
+   width: 100px;
+   height: 40px;
+   padding: 8px;
+   font: 10px sans-serif;
+   background: #ccc;
+   border: solid 1px #aaa;
+   border-radius: 8px;
+   pointer-events: none;
+}
+
+    </style>
+
+</head>
+
+<body>
+    <div class="preloader">
+        <span class="preloader-spin"></span>
+    </div>
+    <div class="site">
+		<header id="header">
+			<div class="container">
+				<div class="row">
+					<div class="col-6 col-sm-3 logo-column">
+						<h3><a href="index.html" class="logo">Datalization</a></h3>
+					</div>
+					<div class="col-6 col-sm-9 nav-column clearfix">
+						<nav id="menu" class="d-none d-lg-block">
+							<ul>
+								<li><a href="index.html">Home</a></li>
+								<li class="current-menu-item"><a href="dataset.html">DataSet</a></li>
+                <li class="has-child">
+                  <a href="map-d3.html">D3 implementation</a>
+                  <ul class="sub-menu">
+                    <li><a href="map-d3.html"><i class="fa fa-bar-chart"></i> Tree Diagram</a></li>
+                    <li><a href="pack-d3.html"><i class="fa fa-pie-chart"></i> Pack Diagram</a></li>
+                    <!-- <li><a href="#"><i class="fa fa-area-chart"></i> Area Chart</a></li>
+                    <li><a href="#"><i class="fa fa-line-chart"></i> Line Chart</a></li> -->
+                  </ul>
+                </li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</header>
+		<main id="main">
+			<div class="page-title sp" style="background-image: url(assets/img/home-banner.jpg)">
+				<div class="container text-center">
+					<h2>About D3 Implementation</h2>
+					<!-- <p>For this project, we will collect data from Fire Departmemt.</p> -->
+				</div>
+			</div>
+			<div class="about-area sp">
+				<div class="container content-main">
+          <h4>Hierarchy diagram Implementation</h4>
+          <p>Visualize the <a href="https://data.sfgov.org/City-Infrastructure/311-Cases/vw6y-z8j6">“ SF 311 dataset”. </a>
+            Use the "Filter" » "Sort & Roll-Up" » "Roll-Ups & Drill-Downs" functionality to start building a hierarchy of <Strong>call types</Strong>.
+            I put into a CSV format and then use d3.stratify() to put it into the final hierarchy format
+          <p>Enclosure diagrams use containment (nesting) to represent a hierarchy. The size of the leaf circles encodes a quantitative dimension of the data. The enclosing circles show the approximate cumulative size of each subtree,
+            but due to wasted space there is some distortion; only the leaf nodes can be compared accurately.I use <strong>call type</strong> to group a hierarchy data to show the relationship of them.</p>
+          <!-- <p>I choose <strong>choropleth map</strong> to visualize the dateset. I rollup the "residential building request" cases by districts
+          and visualize a numerical value using fill colr for that region.</p> -->
+          <p>D3’s cluster layout produces node-link diagrams with leaf nodes at equal depth. These are less compact than tidy trees, but are useful for dendrograms, hierarchical clustering and phylogenetic trees.</p>
+          <hr>
+          <h4>Visualization Writeup</h4>
+          <ul>
+            <li><strong>Encoding: </strong>The size of the leaf circles encodes a quantitative dimension of the data.</li>
+            <li><strong>Interactivity: </strong>
+            <ul>
+                <li><strong>Hovering And Tooltips: </strong>show details when the mouse hovers over a node .</li>
+                <li><strong>Zooming And Panning:: </strong>Allow users to zoom in on a region (click) the view while zoomed in.</li>
+            </ul>
+          </li>
+            <li><strong>Wrangling: </strong>use the "Filter" » "Sort & Roll-Up" » "Roll-Ups & Drill-Downs" functionality to start building a hierarchy of call types.
+            I put into a CSV format and then use d3.stratify() to put it into the final hierarchy format.</li>
+            <li><strong>Conclusion: </strong>The tree shows the Categories which has four subcategories below: Alarm, Fire, Non-Life Threatening and Potentially Life Threatening.
+            At each subcategory, you can find the specific call type.</li>
+          </ul>
+
+          <br>
+          <figure>
+            <svg width="900" height="600" id="vis"></svg>
+         <figcaption>
+           Source: <a href="https://data.sfgov.org/City-Infrastructure/311-Cases/vw6y-z8j6">311 Department cases call type Category</a>
+         </figcaption>
+        </figure>
+
+
+
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+        <script src="https://d3js.org/d3-hierarchy.v1.min.js"></script>
+        <script src="https://d3js.org/d3-dsv.v1.min.js"></script>
+        <script>
+
+  var svg = d3.select("svg"),
+      margin = 60,
+      diameter = +svg.attr("width"),
+      g = svg.append("g").attr("transform", "translate(" + 400 + "," + diameter / 3 + ")");
+
+  svg.append("text")
+      .text("Categories")
+      .attr("transform", "translate(" + 10 + "," + 20 + ")")
+  var color = d3.scaleLinear()
+      .domain([-1, 5])
+      .range(["rgb(237, 248, 233)", "rgb(49,163,84)", "rgb(0,109,44)"])
+      .interpolate(d3.interpolateHcl);
+
+  var pack = d3.pack()
+      .size([diameter - margin, 600 - margin])
+      .padding(2);
+
+  d3.json("data.json", function(error, root) {
+    if (error) throw error;
+
+    root = d3.hierarchy(root)
+        .sum(function(d) { return d.size; })
+        .sort(function(a, b) { return b.value - a.value; });
+
+    var focus = root,
+        nodes = pack(root).descendants(),
+        view;
+
+    var circle = g.selectAll("circle")
+      .data(nodes)
+      .enter().append("circle")
+        .attr("class", function(d) { return d.parent ? d.children ? "node" : "node node--leaf" : "node node--root"; })
+        .style("fill", function(d) { return d.children ? color(d.depth) : null; })
+        .on("click", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); });
+        console.log(nodes);
+  circle.on("mouseover", mouseover)
+        .on("mousemove", function(d){mousemove(d);})
+        .on("mouseout", mouseout);
+
+    var text = g.selectAll("text")
+      .data(nodes)
+      .enter().append("text")
+        .attr("class", "label")
+        .style("fill-opacity", function(d) { return d.parent === root ? 1 : 0; })
+        .style("display", function(d) { return d.parent === root ? "inline" : "none"; })
+        .text(function(d) { return d.data.name; });
+
+    var node = g.selectAll("circle,text");
+
+    svg
+        // .style("background", color(-1))
+        .on("click", function() { zoom(root); });
+
+    zoomTo([root.x, root.y, root.r*3 + margin]);
+
+    function zoom(d) {
+      var focus0 = focus; focus = d;
+
+      var transition = d3.transition()
+          .duration(d3.event.altKey ? 7500 : 750)
+          .tween("zoom", function(d) {
+            var i = d3.interpolateZoom(view, [focus.x, focus.y, focus.r * 3 + margin]);
+            return function(t) { zoomTo(i(t)); };
+          });
+
+      transition.selectAll("text")
+        .filter(function(d) { return d.parent === focus || this.style.display === "inline"; })
+          .style("fill-opacity", function(d) { return d.parent === focus ? 1 : 0; })
+          .on("start", function(d) { if (d.parent === focus) this.style.display = "inline"; })
+          .on("end", function(d) { if (d.parent !== focus) this.style.display = "none"; });
+    }
+
+    function zoomTo(v) {
+      var k = diameter / v[2]; view = v;
+      node.attr("transform", function(d) { return "translate(" + (d.x - v[0]) * k + "," + (d.y - v[1]) * k + ")"; });
+      circle.attr("r", function(d) { return d.r * k; });
+    }
+  });
+
+  var div = d3.select("body").append("div")
+              .attr("class", "tooltip")
+              .style("opacity", 1e-6);
+
+              function mouseover() {
+                  div.transition()
+                  .duration(300)
+                  .style("opacity", 1);
+              }
+
+              function mousemove(d) {
+                  div
+                  .text("Type:  "+ d.data.name)
+                  .style("left", (d3.event.pageX ) + "px")
+                  .style("top", (d3.event.pageY) + "px");
+              }
+
+              function mouseout() {
+                  div.transition()
+                  .duration(300)
+                  .style("opacity", 1e-6);
+              }
+
+  </script>
+
+				</div>
+			</div>
+		</main>
+		<footer>
+			<div class="footer-bottom">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="copyright-txt">
+								Copyright &copy; 2020.Datalization All rights reserved.
+							</div>
+						</div>
+						<div class="col-lg-6 text-right">
+							<div class="footer-nav">
+								<a href="index.html">Home</a>
+								<a href="dataset.html">Dataset</a>
+								<a href="data.html">Data</a>
+								<a href="team.html">Team</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+    </div>
+
+    <!--Required JS files-->
+<script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+<script src="assets/js/vendor/popper.min.js"></script>
+<script src="assets/js/vendor/bootstrap.min.js"></script>
+<script src="assets/js/vendor/owl.carousel.min.js"></script>
+<script src="assets/js/vendor/isotope.pkgd.min.js"></script>
+<script src="assets/js/vendor/jquery.barfiller.js"></script>
+<script src="assets/js/vendor/loopcounter.js"></script>
+<script src="assets/js/vendor/slicknav.min.js"></script>
+<script src="assets/js/active.js"></script>
+
+</body>
+
+</html>
