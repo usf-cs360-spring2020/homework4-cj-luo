@@ -148,9 +148,10 @@
       diameter = +svg.attr("width"),
       g = svg.append("g").attr("transform", "translate(" + 400 + "," + diameter / 3 + ")");
 
-  svg.append("text")
-      .text("Categories")
-      .attr("transform", "translate(" + 10 + "," + 20 + ")")
+  // svg.append("text")
+  //     .text("Categories")
+  //     .attr("transform", "translate(" + 10 + "," + 20 + ")");
+
   var color = d3.scaleLinear()
       .domain([-1, 5])
       .range(["rgb(237, 248, 233)", "rgb(49,163,84)", "rgb(0,109,44)"])
@@ -177,7 +178,8 @@
         .attr("class", function(d) { return d.parent ? d.children ? "node" : "node node--leaf" : "node node--root"; })
         .style("fill", function(d) { return d.children ? color(d.depth) : null; })
         .on("click", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); });
-        console.log(nodes);
+        // console.log(nodes);
+
   circle.on("mouseover", mouseover)
         .on("mousemove", function(d){mousemove(d);})
         .on("mouseout", mouseout);
